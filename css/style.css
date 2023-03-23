@@ -26,7 +26,7 @@ header {
 
 .container {
     width: 100%;
-    height: 100vh;
+    height: 80vh;
     /* BOOTSTRAP */
     display: flex;
     align-items: center;
@@ -96,6 +96,7 @@ header {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    
 }
 
 .bonus {
@@ -128,6 +129,37 @@ header {
     color: white;
     font-weight: bold;
     text-align: end;
+}
+
+/* BONUS BOTTONI */
+
+.bottoni {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    /* BOOTSTRAP */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.start-stop {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 2px solid black;
+    /* background-color:  green; */
+}
+
+.invert {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 2px solid black;
+    /* background-color: green; */
 }
 
 /* FOOTER */

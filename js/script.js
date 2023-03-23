@@ -28,19 +28,25 @@ const itemsContainer = document.querySelector(".slider-items");
 const itemsContainerBonus = document.querySelector(".slider-bonus");
 
 for (let i = 0; i < images.length; i++) {
-    const currentImg = images [i];
+    const currentImg = images[i];
 
-    const sliderItem = `<div class = "item">
+    const sliderItem = `<div class ="item">
                             <img src="${currentImg.image}" alt="">
                             <div class ="text"> 
                                 <h3 class ="title">${currentImg.title}</h3>
                                 <h4 class ="subtitle">${currentImg.text}</h4>
                             </div>
                         </div>`;
-    const sliderBonus =`<div class = "bonus"><img src="${currentImg.image}" alt=""></div>`;
-        
+    const sliderBonus =`<div class ="bonus" index"${i}"><img src="${currentImg.image}" alt=""></div>`;
+
     itemsContainer.innerHTML += sliderItem;
     itemsContainerBonus.innerHTML += sliderBonus;
+
+    document.querySelectorAll(".bonus").forEach(x => x.addEventListner("click", handleClickImage));
+    console.log(x)
+    function handleClickImage(event) {
+        console.log(event.currentTarget)
+    }
 }
 
 // Imposto la prima immagine e nascondo le altre in css
@@ -146,11 +152,4 @@ itemsContainer.addEventListener("mouseover", function() {
 itemsContainer.addEventListener("mouseout", function() {
     autoplayInterval = setInterval(nextSlide, 3000)
 });
-
-
-
-
-
-
-
 
