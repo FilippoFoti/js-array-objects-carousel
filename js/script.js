@@ -168,7 +168,7 @@ function ClickImage(event) {
     }, 100)
 };
 
-document.querySelector("start-stop").addEventListener("click", () => {
+document.querySelector(".start-stop").addEventListener("click", () => {
     isPlayed = !isPlayed;
     if(!isPlayed) return stopAutoplay()
     autoplayInterval = startAutoplay(isNext);
