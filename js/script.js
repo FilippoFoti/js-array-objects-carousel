@@ -41,13 +41,9 @@ for (let i = 0; i < images.length; i++) {
 
     itemsContainer.innerHTML += sliderItem;
     itemsContainerBonus.innerHTML += sliderBonus;
+};
 
-    document.querySelectorAll(".bonus").forEach(x => x.addEventListner("click", handleClickImage));
-    console.log(x)
-    function handleClickImage(event) {
-        console.log(event.currentTarget)
-    }
-}
+
 
 // Imposto la prima immagine e nascondo le altre in css
 const itemsArray = document.getElementsByClassName("item");
@@ -153,3 +149,7 @@ itemsContainer.addEventListener("mouseout", function() {
     autoplayInterval = setInterval(nextSlide, 3000)
 });
 
+document.querySelectorAll(".bonus").forEach(x => x.addEventListener("click", handleClickImage));
+function handleClickImage(event) {
+    console.log(event)
+}
