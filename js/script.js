@@ -27,6 +27,9 @@ const images = [
 const itemsContainer = document.querySelector(".slider-items");
 const itemsContainerBonus = document.querySelector(".slider-bonus");
 
+let isPlayed = true;
+let isNext = true;
+
 for (let i = 0; i < images.length; i++) {
     const currentImg = images[i];
 
@@ -37,13 +40,10 @@ for (let i = 0; i < images.length; i++) {
                                 <h4 class ="subtitle">${currentImg.text}</h4>
                             </div>
                         </div>`;
-    const sliderBonus =`<div class ="bonus" index"${i}"><img src="${currentImg.image}" alt=""></div>`;
-
+    const sliderBonus =`<div class ="bonus" index="${i}"><img src="${currentImg.image}" alt=""></div>`;
     itemsContainer.innerHTML += sliderItem;
     itemsContainerBonus.innerHTML += sliderBonus;
 };
-
-
 
 // Imposto la prima immagine e nascondo le altre in css
 const itemsArray = document.getElementsByClassName("item");
@@ -64,7 +64,7 @@ nextBtn.addEventListener("click", function() {
     nextSlide();
     clearInterval(autoplayInterval);
     autoplayInterval = setInterval(nextSlide, 3000);
-})
+});
 
 // Click secondo bottone 
 const prevBtn = document.querySelector(".prev");
@@ -127,17 +127,18 @@ function prevSlide() {
         itemsArray[activeItemIndex].classList.add("active");
         secondBonus[activeItemIndex].classList.add("bonus-active");
     }
-}
+};
 
-function startAutoplay() {
-    autoplayInterval = setInterval(nextSlide, 3000);
-}
+function startAutoplay(isNext) {
+    if (isNext) return setInterval(nextSlide, 3000);
+    return setInterval(prevSlide, 3000);
+};
 
 function stopAutoplay() {
     clearInterval(autoplayInterval);
-}
+};
 
-startAutoplay();
+autoplayInterval = startAutoplay(isNext);
 
 // Bonus 2
 
@@ -149,7 +150,32 @@ itemsContainer.addEventListener("mouseout", function() {
     autoplayInterval = setInterval(nextSlide, 3000)
 });
 
-document.querySelectorAll(".bonus").forEach(x => x.addEventListener("click", handleClickImage));
-function handleClickImage(event) {
-    console.log(event)
-}
+// Click dell'immagine
+
+document.querySelectorAll(".bonus").forEach(x => x.addEventListener("click", ClickImage));
+
+function ClickImage(event) {
+    const index = event.currentTarget.getAttribute("index");
+    activeItemIndex = parseInt(index);
+    document.querySelector(".bonus-active").classList.remove("bonus-active");
+    document.querySelector(".active").classList.remove("active");
+    itemsArray[activeItemIndex].classList.add("active");
+    secondBonus[activeItemIndex].classList.add("bonus-active");
+
+    clearInterval(autoplayInterval)
+    setTimeout(() => {
+        autoplayInterval = startAutoplay(isNext);
+    }, 100)
+};
+
+document.querySelector("start-stop").addEventListener("click", () => {
+    isPlayed = !isPlayed;
+    if(!isPlayed) return stopAutoplay()
+    autoplayInterval = startAutoplay(isNext);
+});
+
+document.querySelector(".invert").addEventListener("click", () => {
+    stopAutoplay()
+    isNext = !isNext;
+    autoplayInterval = startAutoplay(isNext);
+});
